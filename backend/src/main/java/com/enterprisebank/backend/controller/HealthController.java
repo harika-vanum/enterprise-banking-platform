@@ -10,6 +10,6 @@ public class HealthController {
 
     @GetMapping("/health")
     public String health() {
-        return "Enterprise Banking Platform is running!";
+        return "Enterprise Banking Platform is running!!";
     }
 }
