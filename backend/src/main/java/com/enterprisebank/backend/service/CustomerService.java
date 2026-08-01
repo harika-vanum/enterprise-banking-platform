@@ -1,28 +1,23 @@
 package com.enterprisebank.backend.service;
 
-import com.enterprisebank.backend.entity.Customer;
-import com.enterprisebank.backend.repository.CustomerRepository;
-import org.springframework.stereotype.Service;
+import com.enterprisebank.backend.dto.CustomerRequest;
+import com.enterprisebank.backend.dto.CustomerResponse;
+
 
 import java.util.List;
 
-@Service
-public class CustomerService {
-    private final CustomerRepository repository;
 
-    public CustomerService(CustomerRepository repository) {
-        this.repository = repository;
-    }
 
-    public Customer createCustomer(Customer customer){
-        return repository.save(customer);
-    }
+public interface CustomerService{
+    CustomerResponse createCustomer(CustomerRequest request);
 
-    public List<Customer> getAllCustomers(){
-        return repository.findAll();
-    }
+    CustomerResponse getCustomerById(Long id);
 
-    public Customer getCustomerById(Long id){
-        return repository.findById(id).orElse(null);
-    }
+    List<CustomerResponse> getAllCustomers();
+
+    CustomerResponse updateCustomer(Long id, CustomerRequest request);
+
+    void deleteCustomer(Long id);
+
+
 }
