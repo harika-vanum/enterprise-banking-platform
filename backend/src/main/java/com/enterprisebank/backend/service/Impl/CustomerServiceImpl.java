@@ -3,6 +3,7 @@ package com.enterprisebank.backend.service.Impl;
 import com.enterprisebank.backend.dto.CustomerRequest;
 import com.enterprisebank.backend.dto.CustomerResponse;
 import com.enterprisebank.backend.entity.Customer;
+import com.enterprisebank.backend.exception.CustomerNotFoundException;
 import com.enterprisebank.backend.mapper.CustomerMapper;
 import com.enterprisebank.backend.repository.CustomerRepository;
 import com.enterprisebank.backend.service.CustomerService;
@@ -29,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponse getCustomerById(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + id));
 
         return customerMapper.toResponse(customer);
     }
@@ -46,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResponse updateCustomer(Long id, CustomerRequest request) {
 
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + id));
 
         customer.setFirstName(request.getFirstName());
         customer.setLastName(request.getLastName());
@@ -62,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomer(Long id) {
 
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + id));
 
         customerRepository.delete(customer);
     }
