@@ -3,6 +3,7 @@ package com.enterprisebank.backend.controller;
 import com.enterprisebank.backend.dto.CustomerRequest;
 import com.enterprisebank.backend.dto.CustomerResponse;
 import com.enterprisebank.backend.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public CustomerResponse createCustomer(@RequestBody CustomerRequest request) {
+    public CustomerResponse createCustomer(@Valid @RequestBody CustomerRequest request) {
         return service.createCustomer(request);
     }
 
@@ -34,7 +35,7 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     public CustomerResponse updateCustomer(@PathVariable Long id,
-                                           @RequestBody CustomerRequest request) {
+                                           @Valid @RequestBody CustomerRequest request) {
         return service.updateCustomer(id, request);
     }
 
