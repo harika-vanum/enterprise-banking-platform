@@ -30,6 +30,10 @@ public class Account {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
     public Account() {
     }
 
@@ -87,5 +91,13 @@ public class Account {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

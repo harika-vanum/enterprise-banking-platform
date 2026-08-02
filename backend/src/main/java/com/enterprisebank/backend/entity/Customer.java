@@ -2,6 +2,9 @@ package com.enterprisebank.backend.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -21,6 +24,11 @@ public class Customer {
 
     @Column(nullable = false)
     private String phone;
+
+    @OneToMany(mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Account> accounts = new ArrayList<>();
 
     public Customer() {
     }
@@ -63,5 +71,13 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
