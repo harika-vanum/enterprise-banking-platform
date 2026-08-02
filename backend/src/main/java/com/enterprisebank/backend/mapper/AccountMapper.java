@@ -33,9 +33,9 @@ public class AccountMapper {
         response.setStatus(account.getStatus());
         response.setCreatedAt(account.getCreatedAt());
 
-//        if (account.getCustomer() != null) {
-//            response.setCustomerId(account.getCustomer().getId());
-//        }
+        if (account.getCustomer() != null) {
+            response.setCustomerId(account.getCustomer().getId());
+        }
 
         return response;
     }
