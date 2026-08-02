@@ -79,6 +79,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<AccountResponse> getAccountsByCustomerId(Long customerId) {
+
+        customerRepository.findById(customerId)
+                .orElseThrow(() ->
+                        new CustomerNotFoundException(
+                                "Customer not found with ID: " + customerId));
+
+        return accountRepository.findByCustomerId(customerId)
+                .stream()
+                .map(accountMapper::toResponse)
+                .toList();
+    }
+
+    @Override
     public void deleteAccount(Long id) {
 
         if (!accountRepository.existsById(id)) {

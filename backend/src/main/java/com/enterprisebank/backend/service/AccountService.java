@@ -13,5 +13,7 @@ public interface AccountService {
 
     AccountResponse getAccountById(Long id);
 
+    List<AccountResponse> getAccountsByCustomerId(Long customerId);
+
     void deleteAccount(Long id);
 }
