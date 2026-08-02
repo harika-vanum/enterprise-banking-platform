@@ -4,9 +4,17 @@ import java.math.BigDecimal;
 
 public class AccountRequest {
 
+    @NotBlank(message = "Account type is required")
     private String accountType;
+
+    @NotNull(message = "Initial balance is required")
+    @DecimalMin(value = "0.00", message = "Balance cannot be negative")
     private BigDecimal balance;
+
+    @NotBlank(message = "IFSC code is required")
     private String ifscCode;
+
+    @NotNull(message = "Customer ID is required")
     private Long customerId;
 
     public AccountRequest() {

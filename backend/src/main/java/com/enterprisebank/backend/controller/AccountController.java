@@ -3,6 +3,7 @@ package com.enterprisebank.backend.controller;
 import com.enterprisebank.backend.dto.AccountRequest;
 import com.enterprisebank.backend.dto.AccountResponse;
 import com.enterprisebank.backend.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<AccountResponse> createAccount(
-            @RequestBody AccountRequest request) {
+            @Valid @RequestBody AccountRequest request) {
 
         AccountResponse response = accountService.createAccount(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
