@@ -66,7 +66,7 @@ This project is being built following enterprise software engineering practices.
 
 - [x] Repository Setup
 - [ ] Authentication Service
-- [ ] Customer Service
+- [x] Customer Service
 - [ ] Account Service
 - [ ] Transaction Service
 - [ ] Payment Service
