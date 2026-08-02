@@ -22,6 +22,9 @@ public class Account {
     private BigDecimal balance;
 
     @Column(nullable = false)
+    private String ifscCode;
+
+    @Column(nullable = false)
     private String status;
 
     @Column(nullable = false)
@@ -60,6 +63,14 @@ public class Account {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public String getIfscCode() {
+        return ifscCode;
+    }
+
+    public void setIfscCode(String ifscCode) {
+        this.ifscCode = ifscCode;
     }
 
     public String getStatus() {
