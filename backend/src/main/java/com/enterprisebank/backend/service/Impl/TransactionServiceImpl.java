@@ -1,5 +1,8 @@
 package com.enterprisebank.backend.service.Impl;
 
+import com.enterprisebank.backend.exception.AccountNotFoundException;
+import com.enterprisebank.backend.exception.InsufficientBalanceException;
+import com.enterprisebank.backend.exception.TransactionNotFoundException;
 import com.enterprisebank.backend.mapper.TransactionMapper;
 import com.enterprisebank.backend.dto.TransactionRequest;
 import com.enterprisebank.backend.dto.TransactionResponse;
@@ -193,9 +196,9 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction =
                 transactionRepository.findById(id)
                         .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Transaction not found with id: " + id
-                                ));
+                                new TransactionNotFoundException(
+                "Transaction not found with id: " + id
+        ));
 
         return transactionMapper.toResponse(transaction);
     }
@@ -208,7 +211,7 @@ public class TransactionServiceImpl implements TransactionService {
                 transactionRepository
                         .findByTransactionReference(transactionReference)
                         .orElseThrow(() ->
-                                new RuntimeException(
+                                new TransactionNotFoundException(
                                         "Transaction not found with reference: "
                                                 + transactionReference
                                 ));
@@ -248,7 +251,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         return accountRepository.findById(accountId)
                 .orElseThrow(() ->
-                        new RuntimeException(
+                        new AccountNotFoundException(
                                 "Account not found with id: " + accountId
                         ));
     }
@@ -271,7 +274,7 @@ public class TransactionServiceImpl implements TransactionService {
         if (account.getBalance() == null ||
                 account.getBalance().compareTo(amount) < 0) {
 
-            throw new IllegalArgumentException(
+            throw new InsufficientBalanceException(
                     "Insufficient account balance"
             );
         }
