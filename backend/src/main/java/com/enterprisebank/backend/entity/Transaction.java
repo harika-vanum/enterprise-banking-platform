@@ -74,7 +74,7 @@ public class Transaction {
     public void setToAccount(Account toAccount) {
         ToAccount = toAccount;
     }
-    
+
     public String getDescription() {
         return description;
     }
