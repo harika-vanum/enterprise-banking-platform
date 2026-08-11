@@ -7,8 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class TransactionRequest {
-
-    @NotNull(message = "From account ID is required")
+    
     private Long fromAccountId;
 
     private Long toAccountId;
