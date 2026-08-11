@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class TransactionRequest {
-    
+
     private Long fromAccountId;
 
     private Long toAccountId;

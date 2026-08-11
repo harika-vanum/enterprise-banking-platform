@@ -17,11 +17,11 @@ public class Transaction {
     private String transactionReference;
 
     @ManyToOne
-    @JoinColumn(name="from_account_id",nullable=false)
+    @JoinColumn(name="from_account_id")
     private Account fromAccount;
 
     @ManyToOne
-    @JoinColumn(name="to_account_id",nullable=false)
+    @JoinColumn(name="to_account_id")
     private Account ToAccount;
 
     @Enumerated(EnumType.STRING)
