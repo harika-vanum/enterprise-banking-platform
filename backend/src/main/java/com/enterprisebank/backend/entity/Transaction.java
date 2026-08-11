@@ -24,19 +24,24 @@ public class Transaction {
     @JoinColumn(name="to_account_id",nullable=false)
     private Account ToAccount;
 
-    @Column(nullable = false,precision = 19,scale = 2)
-    private BigDecimal Amount;
-
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String transactionType;
+    private TransactionType transactionType;
 
-    @Column(nullable = false)
-    private String Status;
+    @Column(nullable = false, precision = 19, scale = 2)
+    private BigDecimal amount;
+
+    @Column(nullable = false, precision = 19, scale = 2)
+    private BigDecimal balanceAfterTransaction;
 
     private String description;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime transactionDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TransactionStatus status;
 
     public Long getId() {
         return id;
@@ -69,31 +74,7 @@ public class Transaction {
     public void setToAccount(Account toAccount) {
         ToAccount = toAccount;
     }
-
-    public BigDecimal getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        Amount = amount;
-    }
-
-    public String getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
-    }
-
+    
     public String getDescription() {
         return description;
     }
@@ -102,11 +83,43 @@ public class Transaction {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getBalanceAfterTransaction() {
+        return balanceAfterTransaction;
+    }
+
+    public void setBalanceAfterTransaction(BigDecimal balanceAfterTransaction) {
+        this.balanceAfterTransaction = balanceAfterTransaction;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public TransactionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TransactionStatus status) {
+        this.status = status;
     }
 }
