@@ -1,40 +1,20 @@
-package com.enterprisebank.backend.entity;
+package com.enterprisebank.backend.dto;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "accounts")
-public class Account {
+public class AccountResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String accountNumber;
-
-    @Column(nullable = false)
     private String accountType;
-
-    @Column(nullable = false)
     private BigDecimal balance;
-
-    @Column(nullable = false)
     private String ifscCode;
-
-    @Column(nullable = false)
     private String status;
-
-    @Column(nullable = false)
     private LocalDateTime createdAt;
+    private Long customerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
-    public Account() {
+    public AccountResponse() {
     }
 
     public Long getId() {
@@ -93,11 +73,11 @@ public class Account {
         this.createdAt = createdAt;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 }
