@@ -38,8 +38,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
+        System.out.println("Authorization Header: " + authHeader);
+
         if (authHeader == null ||
                 !authHeader.startsWith("Bearer ")) {
+
+            System.out.println("No Bearer token found");
 
             filterChain.doFilter(request, response);
             return;
@@ -48,7 +52,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authHeader.substring(7);
 
         try {
+
             String username = jwtService.extractUsername(token);
+
+            System.out.println("JWT Username: " + username);
 
             if (username != null &&
                     SecurityContextHolder
@@ -59,9 +66,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         userDetailsService
                                 .loadUserByUsername(username);
 
-                if (jwtService.isTokenValid(
+                System.out.println(
+                        "User found: " + userDetails.getUsername()
+                );
+
+                boolean valid = jwtService.isTokenValid(
                         token,
-                        userDetails.getUsername())) {
+                        userDetails.getUsername()
+                );
+
+                System.out.println("JWT Valid: " + valid);
+
+                if (valid) {
 
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(
@@ -78,12 +94,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder
                             .getContext()
                             .setAuthentication(authentication);
+
+                    System.out.println(
+                            "Authentication set successfully"
+                    );
                 }
             }
 
         } catch (Exception exception) {
-            // Invalid or expired JWT.
-            // The request will continue without authentication.
+
+            System.out.println(
+                    "JWT ERROR: "
+                            + exception.getClass().getName()
+            );
+
+            System.out.println(
+                    "JWT ERROR MESSAGE: "
+                            + exception.getMessage()
+            );
         }
 
         filterChain.doFilter(request, response);
