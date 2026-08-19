@@ -11,6 +11,21 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleAccountNotFound(
+            AccountNotFoundException ex,
+            HttpServletRequest request) {
+
+        ApiErrorResponse error = new ApiErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(TransactionNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleTransactionNotFound(
