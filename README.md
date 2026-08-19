@@ -65,10 +65,10 @@ This project is being built following enterprise software engineering practices.
 ## Roadmap
 
 - [x] Repository Setup
-- [ ] Authentication Service
+- [x] Authentication Service
 - [x] Customer Service
-- [ ] Account Service
-- [ ] Transaction Service
+- [x] Account Service
+- [x] Transaction Service
 - [ ] Payment Service
 - [ ] Notification Service
 - [ ] Docker
